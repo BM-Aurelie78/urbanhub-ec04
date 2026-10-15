@@ -1,0 +1,32 @@
+---
+- name: Configuration du serveur web Smart City
+  hosts: smartcity
+  become: true
+
+  vars:
+    city_name: "Paris"
+
+  tasks:
+    - name: Mettre à jour le cache APT
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Installer NGINX
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Demarrer et activer NGINX au boot
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Deployer la page Smart City personnalisee
+      ansible.builtin.template:
+        src: templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: "0644"

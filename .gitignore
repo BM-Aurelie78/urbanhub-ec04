@@ -1,0 +1,16 @@
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+terraform.tfstate.d/
+*.tfplan
+tfplan
+*.bak
+inventory*.ini
+.env
+.env.*
+*.pem
+*.key
+id_rsa
+id_ed25519
+authorized_keys
+*.b1-sauvegarde
